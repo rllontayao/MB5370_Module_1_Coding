@@ -15,7 +15,6 @@ editor: visual
 library(tidyverse)
 ```
 
-
 ```{r}
 
 
@@ -29,12 +28,14 @@ ggplot(data = mpg) + geom_point(mapping = aes(x = displ, y = hwy))
 #aes()a visual property of the objects you’ve already plotted, and can include things like #geom() and aes() are two attributes you need for a pot
 
 ```
+
 ```{r}
 
 #changing color by class
 ggplot(data = mpg) + geom_point(mapping = aes(x = displ, y = hwy, colour = class))
 
 ```
+
 ```{r}
 
 #changing size by class 
@@ -42,16 +43,19 @@ ggplot(data = mpg) + geom_point(mapping = aes(x = displ, y = hwy, size = class))
 
 #> Warning: Using size for a discrete variable is not advised.
 ```
+
 ```{r}
 #alpha for transparency
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy, alpha = class))
 ```
+
 ```{r}
 #change by shape
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy, shape = class))
 ```
+
 ```{r}
 #manual setting color
 ggplot(data = mpg) + 
@@ -70,6 +74,7 @@ ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy)) + 
   facet_wrap(~ class, nrow = 2)
 ```
+
 ```{r}
 #facet grid
 ggplot(data = mpg) + 
@@ -78,6 +83,7 @@ ggplot(data = mpg) +
 
 
 ```
+
 ```{r}
 #what happens if you add a "."
 ggplot(data = mpg) + 
@@ -85,6 +91,7 @@ ggplot(data = mpg) +
   facet_grid(. ~ cyl)
 #takes out the drive
 ```
+
 ```{r}
 #ill take out the cyl
 ggplot(data = mpg) + 
@@ -99,38 +106,45 @@ ggplot(data = mpg) +
 #tried switching the . in different places it shifts its axis
 #ncol and nrow means number of columns or rows
 ```
+
 ```{r}
 #geom_point() means display it as point
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy))
 
 ```
+
 ```{r}
 #using smooth lines geom_smooth()
 ggplot(data = mpg) + 
   geom_smooth(mapping = aes(x = displ, y = hwy))
 ```
+
 ```{r}
 #linetype
 ggplot(data = mpg) + 
   geom_smooth(mapping = aes(x = displ, y = hwy, linetype = drv))
 ```
+
 ```{r}
 #try line color
 ggplot(data = mpg) + 
   geom_smooth(mapping = aes(x = displ, y = hwy, colour = drv))
 ```
+
 ```{r}
 #i wanna try both
 ggplot(data = mpg) + 
   geom_smooth(mapping = aes(x = displ, y = hwy, linetype = drv, colour =drv))
 ```
+
 ```{r}
 #lines and colors and points
 ggplot(data = mpg) + 
   geom_smooth(mapping = aes(x = displ, y = hwy, linetype = drv, colour = drv)) +
   geom_point(mapping = aes(x = displ, y = hwy, linetype = drv, colour = drv))
 ```
+
 ```{r}
 #group using discrete variables
 ggplot(data = mpg) +
@@ -138,17 +152,20 @@ ggplot(data = mpg) +
 #doesnt show legend but groups it
 
 ```
+
 ```{r}
 ggplot(data = mpg) +
   geom_smooth(mapping = aes(x = displ, y = hwy, color = drv),
     show.legend = FALSE,)
 #groups it by color but does not show the legend
 ```
+
 ```{r}
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy)) +
   geom_smooth(mapping = aes(x = displ, y = hwy))
 ```
+
 ```{r}
 #making it more efficient programmatically
 ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
@@ -156,17 +173,20 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
   geom_smooth()
 #just put the data and its coordinates at ggplot but adds the data points in different ways
 ```
+
 ```{r}
 ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
   geom_point(mapping=aes(colour=drv)) + 
   geom_smooth(mapping=aes(linetiple=drv))
 ```
+
 ```{r}
 #addlogical
 ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
   geom_point(mapping = aes(color = class)) + 
   geom_smooth(data = filter(mpg, class == "subcompact"), se = FALSE)
 ```
+
 ```{r}
 #geom_line linechart, geom_boxplot boxplot, geom_histogram histogram, geom_area area chart
 ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
@@ -178,20 +198,24 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
   geom_point() + 
   geom_smooth()
 ```
+
 ```{r}
 ggplot() + 
   geom_point(data = mpg, mapping = aes(x = displ, y = hwy)) + 
   geom_smooth(data = mpg, mapping = aes(x = displ, y = hwy))
 #looks the same
 ```
+
 ```{r}
 ggplot(data = diamonds) + 
   geom_bar(mapping = aes(x = cut))
 ```
+
 ```{r}
 ggplot(data = diamonds) + 
   stat_count(mapping = aes(x = cut))
 ```
+
 ```{r}
 demo <- tribble(
   ~cut,         ~freq,
@@ -207,11 +231,13 @@ ggplot(data = demo) +
   geom_bar(mapping = aes(x = cut, y = freq), stat = "identity")
 
 ```
+
 ```{r}
 ggplot(data = diamonds) + 
   geom_bar(mapping = aes(x = cut, y = stat(prop), group = 1))
 
 ```
+
 ```{r}
 ggplot(data = diamonds) + 
   stat_summary(
@@ -235,18 +261,21 @@ ggplot(data = diamonds) +
 ggplot(data = diamonds) + 
   geom_bar(mapping = aes(x = cut, fill = clarity))
 ```
+
 ```{r}
 #To alter transparency (alpha)
 ggplot(data = diamonds, mapping = aes(x = cut, fill = clarity)) + 
   geom_bar(alpha = 1/5, position = "identity")
 
 ```
+
 ```{r}
 #To color the bar outlines with no fill color
 ggplot(data = diamonds, mapping = aes(x = cut, colour = clarity)) + 
   geom_bar(fill = NA, position = "identity")
 
 ```
+
 ```{r}
 #fill
 
@@ -255,6 +284,7 @@ ggplot(data = diamonds) +
 
 
 ```
+
 ```{r}
 #dodge
 
@@ -263,23 +293,184 @@ ggplot(data = diamonds) +
 
 
 ```
+
 ```{r}
 #jitter
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy), position = "jitter")
 ```
 
-#UPDATED TEMPLATE NGANIII
-ggplot(data = <DATA>) + 
-  <GEOM_FUNCTION>(
-     mapping = aes(<MAPPINGS>),
-     stat = <STAT>, 
-     position = <POSITION>
-  ) +
-  <FACET_FUNCTION>
+#UPDATED TEMPLATE NGANIII ggplot(data = <DATA>) + <GEOM_FUNCTION>( mapping = aes(<MAPPINGS>), stat = <STAT>, position = <POSITION> ) + <FACET_FUNCTION>
 
 #GITSetup
-```{r}
 
+#STARTOFAIHELP
+
+```{r}
+library(tidyverse)
+library(palmerpenguins)
+```
+```{r}
+ggplot(data = penguins) +
+  geom_point(mapping = aes(x = bill_length_mm, y = bill_depth_mm, color = species), size = 3) +
+  theme_minimal() +
+  labs(title = "Bill Length vs Bill Depth in Penguins",
+       x = "Bill Length (mm)",
+       y = "Bill Depth (mm)",
+       color = "Species")
+```
+```{r}
+#generate a boxplot comparing flipper_length_mm across species, faceted by island, using custom color palettes
+ggplot(data = penguins) +
+  geom_boxplot(mapping = aes(x = species, y = flipper_length_mm, fill = species)) +
+  facet_wrap(~ island) +
+  scale_fill_brewer(palette = "Set2") +
+  theme_minimal() +
+  labs(title = "Flipper Length by Species and Island",
+       x = "Species",
+       y = "Flipper Length (mm)",
+       fill = "Species")
+```
+
+```{r}
+#build a scatter plot mapping body_mass_g against flipper_length_mm, adding a linear regression trend line (geom_smooth) for each species.
+ggplot(data = penguins) +
+  geom_point(mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species), size = 3) +
+  geom_smooth(mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species), method = "lm", se = FALSE) +
+  theme_minimal() +
+  labs(title = "Body Mass vs Flipper Length in Penguins",
+       x = "Flipper Length (mm)",
+       y = "Body Mass (g)",
+       color = "Species")
+```
+```{r}
+library(ggplot2)
+
+data(iris)
+
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+  geom_point()
+
+```
+```{r}
+sst <- 30.2
+
+if (sst > 29.5) {
+  print("Warning: Marine heatwave threshold exceeded!")
+} else {
+  print("SST remains within baseline parameters.")
+}
+```
+
+```{r}
+library(tidyverse)
+
+coral_monitoring <- tibble(
+  site = c("Site_A", "Site_B", "Site_C"),
+  depth_m = c(12, 35, 8)
+)
+coral_monitoring
+
+coral_monitoring <- coral_monitoring %>%
+  mutate(zone = if_else(depth_m > 30, "Deep Reef", "Shallow Reef"))
+
+coral_monitoring
+
+coral_monitoring <- coral_monitoring %>%
+  mutate(reef_category = case_when(
+    depth_m < 10 ~ "Lagoon / Flats",
+    depth_m <= 30 ~ "Crest / Slope",
+    depth_m > 30 ~ "Mesophotic / Deep",
+    TRUE ~ "Unclassified"
+  ))
+
+coral_monitoring
+```
+
+```{r}
+library(dplyr)
+library(tibble)
+
+marine_stations <- tibble(
+  salinity = c(35, 28, 32, 12)
+) %>%
+  mutate(
+    environment_type = case_when(
+      salinity < 15 ~ "Estuarine",
+      salinity <= 30 ~ "Brackish",
+      salinity > 30 ~ "Marine"
+    )
+  )
+marine_stations
+
+```
+```{r}
+for (year in 2020:2024) {
+  print(paste("Processing climate data for year:", year))
+}
+```
+```{r}
+transect_lengths <- c(50, 100, 25, 75)
+
+for (i in seq_along(transect_lengths)) {
+  print(paste("Transect number", i, "measures",
+              transect_lengths[i], "metres."))
+}
+```
+
+```{r}
+site_areas <- c(144, 400, 625)
+
+results <- numeric(length(site_areas))
+
+for (i in seq_along(site_areas)) {
+  results[i] <- sqrt(site_areas[i])
+}
+
+results
+library(purrr)
+
+mapped_results <- map_dbl(site_areas, sqrt)
+
+mapped_results
+```
+```{r}
+iris %>%
+  split(.$Species) %>%
+  map(~summary(.x))
+```
+```{r}
+library(purrr)
+
+fish_counts <- list(
+  station_1 = c(12, 15, 20, 14),
+  station_2 = c(5, 8, 12),
+  station_3 = c(30, 25, 40, 35, 28)
+)
+
+# For-loop approach
+loop_means <- vector("double", length(fish_counts))
+for (i in seq_along(fish_counts)) {
+  loop_means[[i]] <- mean(fish_counts[[i]])
+}
+
+# purrr approach
+purrr_means <- map_dbl(fish_counts, mean)
+
+loop_means
+purrr_means
+
+```
+```{r}
+convert_temp_c_to_f <- function(temp_c) {
+  
+  if (temp_c < -273.15) {
+    stop("Temperature cannot be below absolute zero.")
+  }
+  
+  temp_f <- (temp_c * 9/5) + 32
+  
+  return(temp_f)
+}
 ```
 
